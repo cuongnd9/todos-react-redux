@@ -5,6 +5,21 @@ import Control from './components/Control';
 import TaskList from './components/TaskList';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tasks: []
+        };
+    }
+
+    s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+
+    generateId() {
+        return this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4();
+    }
+
     render() {
         return (
             <div className="container">
