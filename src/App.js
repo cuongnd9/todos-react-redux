@@ -12,6 +12,15 @@ class App extends Component {
         };
     }
 
+    componentWillMount() {
+        if (localStorage && localStorage.getItem('tasks')) {
+            var tasks = JSON.parse(localStorage.getItem('tasks'));
+            this.setState({
+                tasks: tasks
+            });
+        }
+    }
+    
     s4() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
@@ -21,6 +30,8 @@ class App extends Component {
     }
 
     render() {
+        var {tasks} = this.state; // var tasks = this.state.tasks;
+        
         return (
             <div className="container">
                 <div className="row">
@@ -41,7 +52,7 @@ class App extends Component {
                         {/*List*/}
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <TaskList/>
+                                <TaskList tasks={tasks}/>
                             </div>
                         </div>
                     </div>
