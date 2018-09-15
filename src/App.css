@@ -22,6 +22,15 @@
   font-size: large;
 }
 
+.fa-times-circle:hover {
+  color: #E63B45;
+  cursor: pointer;
+}
+
+.fa-times-circle:active {
+  color: #207F40;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

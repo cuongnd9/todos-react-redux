@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class TaskForm extends Component {
+    onCloseForm = () => {
+        this.props.onCloseForm();
+    }
+
     render() {
         return (
             <div className="panel panel-success">
@@ -8,7 +12,7 @@ class TaskForm extends Component {
                     <h3 className="panel-title">
                         Add To Do
                         <p className="text-right" style={{float:'right'}}>
-                            <i className="fa fa-times-circle"></i>
+                            <i className="fa fa-times-circle" onClick={this.onCloseForm}></i>
                         </p>
                     </h3>
                 </div>

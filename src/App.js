@@ -8,8 +8,11 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: []
+            tasks: [],
+            isDisplayForm: false
         };
+        this.onToggleForm = this.onToggleForm.bind(this);
+        this.onCloseForm = this.onCloseForm.bind(this);
     }
 
     componentWillMount() {
@@ -29,20 +32,37 @@ class App extends Component {
         return this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4();
     }
 
+    onToggleForm() {
+        var {isDisplayForm} = this.state;
+        this.setState({
+            isDisplayForm: !isDisplayForm
+        });
+    }
+
+    onCloseForm() {
+        this.setState({
+            isDisplayForm: false
+        });
+    }
+
     render() {
-        var {tasks} = this.state; // var tasks = this.state.tasks;
-        
+        var {tasks, isDisplayForm} = this.state; // var tasks = this.state.tasks;
+        var elementTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> : '';
         return (
             <div className="container">
                 <div className="row">
                     {/*Add To Do*/}
-                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <TaskForm/>
+                    <div className={isDisplayForm ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
+                        {elementTaskForm}
                     </div>
-                    <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
                         {/*Button Add To Do*/}
                         <div className="form-group">
-                            <button type="button" className="btn btn-info">
+                            <button
+                            type="button" 
+                            className="btn btn-info"
+                            onClick={this.onToggleForm}
+                            >
                                 <span className="fa fa-plus"></span>&nbsp;
                                 Add To Do
                             </button>
