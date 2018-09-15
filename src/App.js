@@ -16,6 +16,7 @@ class App extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onUpdateStatus = this.onUpdateStatus.bind(this);
         this.findIndex = this.findIndex.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
     componentWillMount() {
@@ -81,6 +82,19 @@ class App extends Component {
         return result;
     }
 
+    onDelete(id) {
+        var {tasks} = this.state;
+        var index = this.findIndex(id);
+        if (index !== -1) {
+            tasks.splice(index, 1,);
+            this.setState({
+                tasks: tasks
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+        this.onCloseForm();
+    }
+
     render() {
         var {tasks, isDisplayForm} = this.state; // var tasks = this.state.tasks;
         var elementTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/> : '';
@@ -111,6 +125,7 @@ class App extends Component {
                                 <TaskList 
                                     tasks={tasks} 
                                     onUpdateStatus={this.onUpdateStatus}
+                                    onDelete={this.onDelete}
                                 />
                             </div>
                         </div>
