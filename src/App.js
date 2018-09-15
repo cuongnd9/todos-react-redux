@@ -13,6 +13,7 @@ class App extends Component {
         };
         this.onToggleForm = this.onToggleForm.bind(this);
         this.onCloseForm = this.onCloseForm.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -45,9 +46,19 @@ class App extends Component {
         });
     }
 
+    onSubmit(data) {
+        data.id = this.generateId();
+        var {tasks} = this.state;
+        tasks.push(data);
+        this.setState({
+            tasks: tasks
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
     render() {
         var {tasks, isDisplayForm} = this.state; // var tasks = this.state.tasks;
-        var elementTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> : '';
+        var elementTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/> : '';
         return (
             <div className="container">
                 <div className="row">
