@@ -2,12 +2,11 @@
 
 A simple app using Bootstrap & React.
 
+![fireshot capture 1 - to do list - http___localhost_3000_](https://user-images.githubusercontent.com/34389409/45586611-591f8800-b924-11e8-9355-42f977b12e6d.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-![screenshot from 2018-09-11 23-15-02](https://user-images.githubusercontent.com/34389409/45373065-aa740280-b618-11e8-85f0-a7a45d3b9c15.png)
-
 
 ## Demo
 
