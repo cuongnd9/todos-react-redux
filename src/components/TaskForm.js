@@ -10,6 +10,7 @@ class TaskForm extends Component {
         this.onCloseForm = this.onCloseForm.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }    
 
     onCloseForm() {
@@ -31,6 +32,15 @@ class TaskForm extends Component {
     onSubmit(event) {
         event.preventDefault();
         this.props.onSubmit(this.state);
+        this.onCancel();
+        this.onCloseForm();
+    }
+
+    onCancel(event) {
+        this.setState({
+            name: '',
+            status: false
+        });
     }
 
     render() {
@@ -74,7 +84,7 @@ class TaskForm extends Component {
                                 <span className="fa fa-plus"></span>&nbsp;
                                 Save
                             </button>
-                            <button type="button" className="btn btn-default" name="btnCancel">
+                            <button type="button" className="btn btn-default" name="btnCancel" onClick={this.onCancel}>
                                 <span className="fa fa-close"></span>&nbsp;
                                 Cancel
                             </button>
