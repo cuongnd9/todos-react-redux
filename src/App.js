@@ -14,6 +14,8 @@ class App extends Component {
         this.onToggleForm = this.onToggleForm.bind(this);
         this.onCloseForm = this.onCloseForm.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onUpdateStatus = this.onUpdateStatus.bind(this);
+        this.findIndex = this.findIndex.bind(this);
     }
 
     componentWillMount() {
@@ -56,6 +58,29 @@ class App extends Component {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    onUpdateStatus(id) {
+        var {tasks} = this.state;
+        var index = this.findIndex(id);
+        if (index !== -1) {
+            tasks[index].status = !tasks[index].status;
+            this.setState({
+                tasks: tasks
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }
+
+    findIndex(id) {
+        var {tasks} = this.state;
+        var result = -1;
+        tasks.forEach( function(element, index) {
+            if (element.id === id) {
+                result = index;
+            }
+        });
+        return result;
+    }
+
     render() {
         var {tasks, isDisplayForm} = this.state; // var tasks = this.state.tasks;
         var elementTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/> : '';
@@ -83,7 +108,10 @@ class App extends Component {
                         {/*List*/}
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <TaskList tasks={tasks}/>
+                                <TaskList 
+                                    tasks={tasks} 
+                                    onUpdateStatus={this.onUpdateStatus}
+                                />
                             </div>
                         </div>
                     </div>

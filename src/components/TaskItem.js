@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 
 class TaskItem extends Component {
+    onUpdateStatus = () => {
+        this.props.onUpdateStatus(this.props.task.id);
+    }
+
     render() {
         var {task, index} = this.props;
-
         return (
             <tr>
                 <td>{index + 1}</td>
                 <td>{task.name}</td>
                 <td className="text-center">
-                    <span className={task.status ? 'label label-danger' : 'label label-info'}>
+                    <span 
+                        className={task.status ? 'label label-danger' : 'label label-info'}
+                        style={{cursor:'pointer'}}
+                        onClick={this.onUpdateStatus}
+                    >
                         {task.status ? 'Active' : 'Hiden'}
                     </span>
                 </td>
