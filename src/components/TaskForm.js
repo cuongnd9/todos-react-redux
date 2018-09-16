@@ -4,6 +4,7 @@ class TaskForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             name: '',
             status: false
         };
@@ -11,6 +12,34 @@ class TaskForm extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCancel = this.onCancel.bind(this);
+    }
+
+    componentWillMount() {
+        var task = this.props.task;
+        if (task) {
+            this.setState({
+                id: task.id,
+                name: task.name,
+                status: task.status
+            });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        var task = nextProps.task;
+        if (task) {
+            this.setState({
+                id: task.id,
+                name: task.name,
+                status: task.status
+            });
+        } else {
+            this.setState({
+                id: '',
+                name: '',
+                status: false
+            });
+        }
     }    
 
     onCloseForm() {
@@ -44,11 +73,12 @@ class TaskForm extends Component {
     }
 
     render() {
+        var {id} = this.state;
         return (
             <div className="panel panel-success">
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                        Add To Do
+                        {id !== '' ? 'Edit To Do' : 'Add To Do'}
                         <p className="text-right" style={{float:'right'}}>
                             <i className="fa fa-times-circle" onClick={this.onCloseForm}></i>
                         </p>
