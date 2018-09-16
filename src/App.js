@@ -10,7 +10,11 @@ class App extends Component {
         this.state = {
             tasks: [],
             isDisplayForm: false,
-            taskEditing: null
+            taskEditing: null,
+            filter: {
+                name:'',
+                status:-1
+            }
         };
         this.onToggleForm = this.onToggleForm.bind(this);
         this.onShowForm = this.onShowForm.bind(this);
@@ -20,6 +24,7 @@ class App extends Component {
         this.findIndex = this.findIndex.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
+        this.onFilter = this.onFilter.bind(this);
     }
 
     componentWillMount() {
@@ -128,13 +133,37 @@ class App extends Component {
         this.onShowForm();
     }
 
+    onFilter(filterName, filterStatus) {
+        filterStatus = parseInt(filterStatus, 10);
+        this.setState({
+            filter: {
+                name: filterName,
+                status: filterStatus
+            }
+        });
+    }
+
     render() {
-        var {tasks, isDisplayForm, taskEditing} = this.state; // var tasks = this.state.tasks;
+        var {tasks, isDisplayForm, taskEditing, filter} = this.state; // var tasks = this.state.tasks;
+
+        if (filter.name) {
+            tasks = tasks.filter(task => {
+                return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
+            });
+        }
+
+        tasks = tasks.filter(task => {
+            if (filter.status === -1) {
+                return task;
+            } 
+            return task.status == filter.status;
+        })
+        
         var elementTaskForm = isDisplayForm ? <TaskForm 
                                                 onSubmit={this.onSubmit} 
                                                 onCloseForm={this.onCloseForm}
                                                 task={taskEditing}
-                                              /> : ''
+                                              /> : '';
         return (
             <div className="container">
                 <div className="row">
@@ -164,6 +193,7 @@ class App extends Component {
                                     onUpdateStatus={this.onUpdateStatus}
                                     onDelete={this.onDelete}
                                     onUpdate={this.onUpdate}
+                                    onFilter={this.onFilter}
                                 />
                             </div>
                         </div>
