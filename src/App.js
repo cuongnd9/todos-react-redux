@@ -14,7 +14,8 @@ class App extends Component {
             filter: {
                 name:'',
                 status:-1
-            }
+            },
+            keyword: ''
         };
         this.onToggleForm = this.onToggleForm.bind(this);
         this.onShowForm = this.onShowForm.bind(this);
@@ -25,6 +26,7 @@ class App extends Component {
         this.onDelete = this.onDelete.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.onFilter = this.onFilter.bind(this);
+        this.onSearch = this.onSearch.bind(this);
     }
 
     componentWillMount() {
@@ -143,8 +145,14 @@ class App extends Component {
         });
     }
 
+    onSearch(keyword) {
+        this.setState({
+            keyword: keyword
+        });
+    }
+
     render() {
-        var {tasks, isDisplayForm, taskEditing, filter} = this.state; // var tasks = this.state.tasks;
+        var {tasks, isDisplayForm, taskEditing, filter, keyword} = this.state; // var tasks = this.state.tasks;
 
         if (filter.name) {
             tasks = tasks.filter(task => {
@@ -156,8 +164,14 @@ class App extends Component {
             if (filter.status === -1) {
                 return task;
             } 
-            return task.status == filter.status;
+            return task.status === (filter.status === 1 ? true : false) ;
         })
+
+        if (keyword) {
+            tasks = tasks.filter(tasks => {
+                return tasks.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+            })
+        }
         
         var elementTaskForm = isDisplayForm ? <TaskForm 
                                                 onSubmit={this.onSubmit} 
@@ -184,7 +198,7 @@ class App extends Component {
                             </button>
                         </div>
                         {/*Search-Sort*/}
-                        <Control/>
+                        <Control onSearch={this.onSearch}/>
                         {/*List*/}
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
