@@ -3,6 +3,8 @@ import './App.css';
 import TaskForm from  './components/TaskForm';
 import TaskControl from './components/TaskControl';
 import TaskList from './components/TaskList';
+// import _ from 'lodash';
+import { findIndex } from 'lodash';
 
 class App extends Component {
     constructor(props) {
@@ -132,7 +134,7 @@ class App extends Component {
 
     onUpdate(id) {
         var {tasks} = this.state;
-        var index = this.findIndex(id);
+        var index = findIndex(tasks, (task) => task.id === id);
         var taskEditing = tasks[index];
         this.setState({
             taskEditing: taskEditing
