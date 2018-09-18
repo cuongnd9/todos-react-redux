@@ -31,6 +31,10 @@
   color: #207F40;
 }
 
+.dropdown-menu li a {
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

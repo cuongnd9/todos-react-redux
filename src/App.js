@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TaskForm from  './components/TaskForm';
-import Control from './components/Control';
+import TaskControl from './components/TaskControl';
 import TaskList from './components/TaskList';
 
 class App extends Component {
@@ -15,7 +15,11 @@ class App extends Component {
                 name:'',
                 status:-1
             },
-            keyword: ''
+            keyword: '',
+            sort: {
+                by: 'name',
+                value: 1
+            }
         };
         this.onToggleForm = this.onToggleForm.bind(this);
         this.onShowForm = this.onShowForm.bind(this);
@@ -27,6 +31,7 @@ class App extends Component {
         this.onUpdate = this.onUpdate.bind(this);
         this.onFilter = this.onFilter.bind(this);
         this.onSearch = this.onSearch.bind(this);
+        this.onSort = this.onSort.bind(this);
     }
 
     componentWillMount() {
@@ -151,8 +156,17 @@ class App extends Component {
         });
     }
 
+    onSort(sort) {
+        this.setState({
+            sort: {
+                by: sort.by,
+                value: sort.value
+            }
+        });
+    }
+
     render() {
-        var {tasks, isDisplayForm, taskEditing, filter, keyword} = this.state; // var tasks = this.state.tasks;
+        var {tasks, isDisplayForm, taskEditing, filter, keyword, sort} = this.state; // var tasks = this.state.tasks;
 
         if (filter.name) {
             tasks = tasks.filter(task => {
@@ -168,11 +182,33 @@ class App extends Component {
         })
 
         if (keyword) {
-            tasks = tasks.filter(tasks => {
-                return tasks.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+            tasks = tasks.filter(task => {
+                return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
             })
         }
         
+        if (sort.by === 'name') {
+            if (sort.value === 1) {
+                tasks = tasks.sort((a, b) => {
+                    return a.name.localeCompare(b.name);
+                });
+            } else {
+                tasks = tasks.sort((a, b) => {
+                    return b.name.localeCompare(a.name);
+                });
+            }
+        } else {
+            if (sort.value === 1) {
+                tasks = tasks.sort((a, b) => {
+                    return b.status.toString().localeCompare(a.status.toString());
+                });
+            } else {
+                tasks = tasks.sort((a, b) => {
+                    return a.status.toString().localeCompare(b.status.toString());
+                });
+            }
+        }
+
         var elementTaskForm = isDisplayForm ? <TaskForm 
                                                 onSubmit={this.onSubmit} 
                                                 onCloseForm={this.onCloseForm}
@@ -198,7 +234,10 @@ class App extends Component {
                             </button>
                         </div>
                         {/*Search-Sort*/}
-                        <Control onSearch={this.onSearch}/>
+                        <TaskControl 
+                            onSearch={this.onSearch}
+                            onSort={this.onSort}
+                        />
                         {/*List*/}
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
