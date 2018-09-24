@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import * as actions from './../actions/index';
 
 class TaskForm extends Component {
     constructor(props) {
@@ -40,7 +42,7 @@ class TaskForm extends Component {
                 status: false
             });
         }
-    }    
+    }
 
     onCloseForm() {
         this.props.onCloseForm();
@@ -60,7 +62,7 @@ class TaskForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.onSubmit(this.state);
+        this.props.onAddTask(this.state);
         this.onCancel();
         this.onCloseForm();
     }
@@ -89,9 +91,9 @@ class TaskForm extends Component {
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label>Name:</label>
-                            <input 
-                                type="text" 
-                                className="form-control" 
+                            <input
+                                type="text"
+                                className="form-control"
                                 name="name"
                                 value={this.state.name}
                                 onChange={this.onChange}
@@ -99,8 +101,8 @@ class TaskForm extends Component {
                         </div>
                         <div className="form-group">
                             <label>Status:</label>
-                            <select 
-                                className="form-control" 
+                            <select
+                                className="form-control"
                                 name="status"
                                 value={this.state.status}
                                 onChange={this.onChange}
@@ -126,4 +128,18 @@ class TaskForm extends Component {
     }
 }
 
-export default TaskForm;
+const mapStateToProps = state => {
+  return {
+
+  };
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddTask: (task) => {
+      dispatch(actions.addTask(task));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
