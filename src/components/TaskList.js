@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
+import {connect} from 'react-redux';
 
 class TaskList extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class TaskList extends Component {
         var target = event.target;
         var value = target.value;
         var name = target.name;
-        
+
         this.props.onFilter(
             name === 'filterName' ? value : this.state.filterName,
             name === 'filterStatus' ? value : this.state.filterStatus
@@ -30,9 +31,9 @@ class TaskList extends Component {
         var {tasks} = this.props;
         var {filterName, filterStatus} = this.state;
         var elementTasks = tasks.map((element, index) => {
-            return <TaskItem 
-                        key={index} 
-                        index={index} 
+            return <TaskItem
+                        key={index}
+                        index={index}
                         task={element}
                         onUpdateStatus={this.props.onUpdateStatus}
                         onDelete={this.props.onDelete}
@@ -54,17 +55,17 @@ class TaskList extends Component {
                     <tr>
                         <td></td>
                         <td>
-                            <input 
-                                type="text" 
-                                className="form-control" 
+                            <input
+                                type="text"
+                                className="form-control"
                                 name="filterName"
                                 value={filterName}
                                 onChange={this.onChange}
                             />
                         </td>
                         <td>
-                            <select 
-                                className="form-control" 
+                            <select
+                                className="form-control"
                                 name="filterStatus"
                                 value={filterStatus}
                                 onChange={this.onChange}
@@ -83,4 +84,10 @@ class TaskList extends Component {
     }
 }
 
-export default TaskList;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks
+  };
+}
+
+export default connect(mapStateToProps, null)(TaskList);
