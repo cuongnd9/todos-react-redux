@@ -1,6 +1,6 @@
 # To Do List 2
 
-Continue with [To Do List](https://github.com/ndc07/to-do-list) using React, I upgrade it with Redux.
+Continuing with [To Do List](https://github.com/ndc07/to-do-list) using React, I upgrade it with Redux.
 
 ![fireshot capture 1 - to do list - http___localhost_3000_](https://user-images.githubusercontent.com/34389409/45586611-591f8800-b924-11e8-9355-42f977b12e6d.png)
 
