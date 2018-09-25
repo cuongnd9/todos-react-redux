@@ -16,6 +16,13 @@ var tasks = (state = initialState, action) => {
       state.push(newTask);
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
+    case types.UPDATE_STATUS:
+      var index = findIndex(action.id, state);
+      var cloneTask = {...state[index]};
+      cloneTask.status = !cloneTask.status;
+      state[index] = cloneTask;
+      localStorage.setItem('tasks', JSON.stringify(state));
+      return [...state];
     default:
       return state;
   }
@@ -27,6 +34,16 @@ function s4() {
 
 function generateId() {
   return s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4();
+}
+
+function findIndex(id, tasks) {
+  var result = -1;
+  tasks.forEach(function(element, index) {
+    if (element.id === id) {
+      result = index;
+    }
+  });
+  return result;
 }
 
 export default tasks;

@@ -25,7 +25,6 @@ class App extends Component {
     };
     this.onToggleForm = this.onToggleForm.bind(this);
     this.onShowForm = this.onShowForm.bind(this);
-    this.onUpdateStatus = this.onUpdateStatus.bind(this);
     this.findIndex = this.findIndex.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -52,19 +51,6 @@ class App extends Component {
 
   onShowForm() {
     this.setState({isDisplayForm: true});
-  }
-
-
-  onUpdateStatus(id) {
-    var {
-      tasks
-    } = this.state;
-    var index = this.findIndex(id);
-    if (index !== -1) {
-      tasks[index].status = !tasks[index].status;
-      this.setState({tasks: tasks});
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
   }
 
   findIndex(id) {
@@ -200,7 +186,7 @@ class App extends Component {
           <TaskControl onSearch={this.onSearch} onSort={this.onSort}/> {/* List */}
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <TaskList onUpdateStatus={this.onUpdateStatus} onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter}/>
+              <TaskList onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter}/>
             </div>
           </div>
         </div>
