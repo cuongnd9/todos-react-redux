@@ -20,7 +20,7 @@ class TaskItem extends Component {
                 <td>{index + 1}</td>
                 <td>{task.name}</td>
                 <td className="text-center">
-                    <span 
+                    <span
                         className={task.status ? 'label label-danger' : 'label label-info'}
                         style={{cursor:'pointer'}}
                         onClick={this.onUpdateStatus}
@@ -29,15 +29,15 @@ class TaskItem extends Component {
                     </span>
                 </td>
                 <td className="text-center">
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         className="btn btn-success"
                         onClick={this.onUpdate}
                     >
                         <i className="fa fa-edit"></i>&nbsp;Edit
                     </button>&nbsp;
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         className="btn btn-danger"
                         onClick={this.onDelete}
                     >
