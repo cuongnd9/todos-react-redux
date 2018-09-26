@@ -4,6 +4,7 @@ var data = JSON.parse(localStorage.getItem('tasks'));
 var initialState = data ? data : [];
 
 var tasks = (state = initialState, action) => {
+  var index = -1;
   switch (action.type) {
     case types.LIST_ALL:
       return state;
@@ -11,21 +12,26 @@ var tasks = (state = initialState, action) => {
       var newTask = {
         id: generateId(),
         name: action.task.name,
-        status: action.task.status === 'true' ? true : false
+        status: action.task.status
       };
       state.push(newTask);
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
     case types.UPDATE_STATUS:
-      var index = findIndex(action.id, state);
+      index = findIndex(action.id, state);
       var cloneTask = {...state[index]};
       cloneTask.status = !cloneTask.status;
       state[index] = cloneTask;
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
     case types.DELETE:
-      var indexDelete = findIndex(action.id, state);
-      state.splice(indexDelete, 1,);
+      index = findIndex(action.id, state);
+      state.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(state));
+      return [...state];
+    case types.UPDATE:
+      index = findIndex(action.id, state);
+      state.splice(index, 1, action.task);
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
     default:

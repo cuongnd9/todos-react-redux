@@ -17,18 +17,24 @@ class TaskForm extends Component {
     }
 
     componentWillMount() {
-        var task = this.props.task;
+        var task = this.props.taskEditing;
         if (task) {
             this.setState({
                 id: task.id,
                 name: task.name,
                 status: task.status
             });
+        } else {
+            this.setState({
+                id: '',
+                name: '',
+                status: false
+            });
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        var task = nextProps.task;
+        var task = nextProps.taskEditing;
         if (task) {
             this.setState({
                 id: task.id,
@@ -62,20 +68,34 @@ class TaskForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.onAddTask(this.state);
+        if (this.props.taskEditing.id !== '') {
+          this.props.onUpdate(this.state);
+        } else {
+          this.props.onAddTask(this.state);
+        }
         this.onCancel();
         this.onCloseForm();
     }
 
     onCancel(event) {
+      if (this.props.taskEditing.id !== '') {
+        var task = this.props.taskEditing;
+        this.setState({
+          id: task.id,
+          name: task.name,
+          status: task.status
+        });
+      } else {
         this.setState({
             name: '',
             status: false
         });
+      }
     }
 
     render() {
         var {id} = this.state;
+        if (!this.props.isDisplayForm) return '';
         return (
             <div className="panel panel-success">
                 <div className="panel-heading">
@@ -130,17 +150,21 @@ class TaskForm extends Component {
 
 const mapStateToProps = state => {
   return {
-
+    isDisplayForm: state.isDisplayForm,
+    taskEditing: state.taskEditing
   };
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddTask: (task) => {
+    onAddTask: task => {
       dispatch(actions.addTask(task));
     },
     onCloseForm: () => {
       dispatch(actions.closeForm());
+    },
+    onUpdate: task => {
+      dispatch(actions.update(task));
     }
   }
 }
