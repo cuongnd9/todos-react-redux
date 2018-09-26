@@ -26,7 +26,6 @@ class App extends Component {
     this.onToggleForm = this.onToggleForm.bind(this);
     this.onShowForm = this.onShowForm.bind(this);
     this.findIndex = this.findIndex.bind(this);
-    this.onDelete = this.onDelete.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.onFilter = this.onFilter.bind(this);
     this.onSearch = this.onSearch.bind(this);
@@ -66,18 +65,18 @@ class App extends Component {
     return result;
   }
 
-  onDelete(id) {
-    var {
-      tasks
-    } = this.state;
-    var index = this.findIndex(id);
-    if (index !== -1) {
-      tasks.splice(index, 1,);
-      this.setState({tasks: tasks});
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-    this.onCloseForm();
-  }
+  // onDelete(id) {
+  //   var {
+  //     tasks
+  //   } = this.state;
+  //   var index = this.findIndex(id);
+  //   if (index !== -1) {
+  //     tasks.splice(index, 1,);
+  //     this.setState({tasks: tasks});
+  //     localStorage.setItem('tasks', JSON.stringify(tasks));
+  //   }
+  //   this.onCloseForm();
+  // }
 
   onUpdate(id) {
     var {
@@ -186,7 +185,7 @@ class App extends Component {
           <TaskControl onSearch={this.onSearch} onSort={this.onSort}/> {/* List */}
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <TaskList onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter}/>
+              <TaskList onUpdate={this.onUpdate} onFilter={this.onFilter}/>
             </div>
           </div>
         </div>

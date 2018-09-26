@@ -23,6 +23,11 @@ var tasks = (state = initialState, action) => {
       state[index] = cloneTask;
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
+    case types.DELETE:
+      var indexDelete = findIndex(action.id, state);
+      state.splice(indexDelete, 1,);
+      localStorage.setItem('tasks', JSON.stringify(state));
+      return [...state];
     default:
       return state;
   }
