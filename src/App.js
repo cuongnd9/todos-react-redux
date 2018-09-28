@@ -10,10 +10,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: {
-        name: '',
-        status: -1
-      },
       keyword: '',
       sort: {
         by: 'name',
@@ -21,7 +17,6 @@ class App extends Component {
       }
     };
     this.onToggleForm = this.onToggleForm.bind(this);
-    this.onFilter = this.onFilter.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.onSort = this.onSort.bind(this);
   }
@@ -36,16 +31,6 @@ class App extends Component {
     } else {
       this.props.onToggleForm();
     }
-  }
-
-  onFilter(filterName, filterStatus) {
-    filterStatus = parseInt(filterStatus, 10);
-    this.setState({
-      filter: {
-        name: filterName,
-        status: filterStatus
-      }
-    });
   }
 
   onSearch(keyword) {
@@ -63,24 +48,12 @@ class App extends Component {
 
   render() {
     // var {
-      // filter,
       // keyword,
       // sort
     // } = this.state; // var tasks = this.state.tasks;
     var {isDisplayForm} = this.props;
 
-    // if (filter.name) {
-    //     tasks = tasks.filter(task => {
-    //         return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
-    //     });
-    // }
-    //
-    // tasks = tasks.filter(task => {
-    //     if (filter.status === -1) {
-    //         return task;
-    //     }
-    //     return task.status === (filter.status === 1 ? true : false) ;
-    // })
+
     //
     // if (keyword) {
     //     tasks = tasks.filter(task => {
@@ -132,7 +105,7 @@ class App extends Component {
           <TaskControl onSearch={this.onSearch} onSort={this.onSort}/> {/* List */}
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <TaskList onFilter={this.onFilter}/>
+              <TaskList/>
             </div>
           </div>
         </div>
