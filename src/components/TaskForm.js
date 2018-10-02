@@ -68,7 +68,7 @@ class TaskForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        if (this.props.taskEditing.id !== '') {
+        if (this.props.taskEditing.id) {
           this.props.onUpdate(this.state);
         } else {
           this.props.onAddTask(this.state);
@@ -100,7 +100,7 @@ class TaskForm extends Component {
             <div className="panel panel-success">
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                        {id !== '' ? 'Edit To Do' : 'Add To Do'}
+                        {id ? 'Edit To Do' : 'Add To Do'}
                         <p className="text-right" style={{float:'right'}}>
                             <i className="fa fa-times-circle" onClick={this.onCloseForm}></i>
                         </p>
