@@ -44,7 +44,7 @@ class App extends Component {
             });
         }
     }
-    
+
     s4() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
@@ -59,7 +59,7 @@ class App extends Component {
             this.setState({
                 isDisplayForm: true,
                 taskEditing: null
-            });     
+            });
         } else {
             this.setState({
                 isDisplayForm: !isDisplayForm,
@@ -179,7 +179,7 @@ class App extends Component {
         tasks = tasks.filter(task => {
             if (filter.status === -1) {
                 return task;
-            } 
+            }
             return task.status === (filter.status === 1 ? true : false) ;
         })
 
@@ -188,7 +188,7 @@ class App extends Component {
                 return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
             })
         }
-        
+
         if (sort.by === 'name') {
             if (sort.value === 1) {
                 tasks = tasks.sort((a, b) => {
@@ -211,8 +211,8 @@ class App extends Component {
             }
         }
 
-        var elementTaskForm = isDisplayForm ? <TaskForm 
-                                                onSubmit={this.onSubmit} 
+        var elementTaskForm = isDisplayForm ? <TaskForm
+                                                onSubmit={this.onSubmit}
                                                 onCloseForm={this.onCloseForm}
                                                 task={taskEditing}
                                               /> : '';
@@ -227,7 +227,7 @@ class App extends Component {
                         {/*Button Add To Do*/}
                         <div className="form-group">
                             <button
-                            type="button" 
+                            type="button"
                             className="btn btn-info"
                             onClick={this.onToggleForm}
                             >
@@ -236,15 +236,15 @@ class App extends Component {
                             </button>
                         </div>
                         {/*Search-Sort*/}
-                        <TaskControl 
+                        <TaskControl
                             onSearch={this.onSearch}
                             onSort={this.onSort}
                         />
                         {/*List*/}
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <TaskList 
-                                    tasks={tasks} 
+                                <TaskList
+                                    tasks={tasks}
                                     onUpdateStatus={this.onUpdateStatus}
                                     onDelete={this.onDelete}
                                     onUpdate={this.onUpdate}
