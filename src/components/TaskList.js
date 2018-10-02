@@ -28,14 +28,16 @@ class TaskList extends Component {
     }
 
     render() {
-        var {tasks, filterTable, keyword} = this.props;
+        var {tasks, filterTable, keyword, sort} = this.props;
         var {filterName, filterStatus} = this.state;
+        // Filter Name
         if (filterTable.name) {
             tasks = tasks.filter(task => {
                 return task.name.toLowerCase().indexOf(filterTable.name.toLowerCase()) !== -1;
             });
         }
 
+        // Filter Status
         tasks = tasks.filter(task => {
             if (filterTable.status === -1) {
                 return task;
@@ -43,10 +45,34 @@ class TaskList extends Component {
             return task.status === (filterTable.status === 1 ? true : false) ;
         })
 
+        // Search
         if (keyword) {
           tasks = tasks.filter(task => {
               return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
           });
+        }
+
+        // Sort
+        if (sort.by === 'name') {
+            if (sort.value === 1) {
+                tasks = tasks.sort((a, b) => {
+                    return a.name.localeCompare(b.name);
+                });
+            } else {
+                tasks = tasks.sort((a, b) => {
+                    return b.name.localeCompare(a.name);
+                });
+            }
+        } else {
+            if (sort.value === 1) {
+                tasks = tasks.sort((a, b) => {
+                    return b.status.toString().localeCompare(a.status.toString());
+                });
+            } else {
+                tasks = tasks.sort((a, b) => {
+                    return a.status.toString().localeCompare(b.status.toString());
+                });
+            }
         }
 
         var elementTasks = tasks.map((element, index) => {
@@ -104,7 +130,8 @@ const mapStateToProps = state => {
   return {
     tasks: state.tasks,
     filterTable: state.filterTable,
-    keyword: state.keyword
+    keyword: state.search,
+    sort: state.sort
   };
 }
 

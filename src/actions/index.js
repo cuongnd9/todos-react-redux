@@ -63,3 +63,10 @@ export const search = keyword => {
     keyword
   }
 }
+
+export const sort = sort => {
+  return {
+    type: types.SORT,
+    sort
+  }
+}

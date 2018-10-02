@@ -3,14 +3,16 @@ import tasks from './tasks';
 import isDisplayForm from './isDisplayForm';
 import taskEditing from './taskEditing';
 import filterTable from './filterTable';
-import keyword from './keyword';
+import search from './search';
+import sort from './sort';
 
 const rootReducer = combineReducers({
   tasks,// tasks: tasks
   isDisplayForm,
   taskEditing,
   filterTable,
-  keyword
+  search,
+  sort
 });
 
 export default rootReducer;

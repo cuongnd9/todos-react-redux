@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as actions from './../actions/index';
+import {connect} from 'react-redux';
 
 class TaskSortControl extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class TaskSortControl extends Component {
                 value: sortValue
             }
         });
-        this.props.onSort({by: sortName, value: sortValue});
+        this.props.onSort({by: sortName, name: sortValue});
     }
 
     render() {
@@ -67,4 +69,12 @@ class TaskSortControl extends Component {
     }
 }
 
-export default TaskSortControl;
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onSort: sort => {
+      dispatch(actions.sort(sort));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TaskSortControl);

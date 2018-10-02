@@ -9,14 +9,7 @@ import * as actions from './actions/index';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sort: {
-        by: 'name',
-        value: 1
-      }
-    };
     this.onToggleForm = this.onToggleForm.bind(this);
-    this.onSort = this.onSort.bind(this);
   }
 
   onToggleForm() {
@@ -31,42 +24,8 @@ class App extends Component {
     }
   }
 
-  onSort(sort) {
-    this.setState({
-      sort: {
-        by: sort.by,
-        value: sort.value
-      }
-    });
-  }
-
   render() {
     var {isDisplayForm} = this.props;
-
-
-    //
-    // if (sort.by === 'name') {
-    //     if (sort.value === 1) {
-    //         tasks = tasks.sort((a, b) => {
-    //             return a.name.localeCompare(b.name);
-    //         });
-    //     } else {
-    //         tasks = tasks.sort((a, b) => {
-    //             return b.name.localeCompare(a.name);
-    //         });
-    //     }
-    // } else {
-    //     if (sort.value === 1) {
-    //         tasks = tasks.sort((a, b) => {
-    //             return b.status.toString().localeCompare(a.status.toString());
-    //         });
-    //     } else {
-    //         tasks = tasks.sort((a, b) => {
-    //             return a.status.toString().localeCompare(b.status.toString());
-    //         });
-    //     }
-    // }
-
 
     return (<div className="container">
       <div className="row">
@@ -86,7 +45,7 @@ class App extends Component {
             </button>
           </div>
           {/* Search-Sort */}
-          <TaskControl onSort={this.onSort}/> {/* List */}
+          <TaskControl/> {/* List */}
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <TaskList/>
