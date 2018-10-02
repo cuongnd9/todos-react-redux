@@ -56,3 +56,10 @@ export const filterTable = filter => {
     filter
   }
 }
+
+export const search = keyword => {
+  return {
+    type: types.SEARCH,
+    keyword
+  }
+}

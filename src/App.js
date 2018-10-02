@@ -10,14 +10,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: '',
       sort: {
         by: 'name',
         value: 1
       }
     };
     this.onToggleForm = this.onToggleForm.bind(this);
-    this.onSearch = this.onSearch.bind(this);
     this.onSort = this.onSort.bind(this);
   }
 
@@ -33,10 +31,6 @@ class App extends Component {
     }
   }
 
-  onSearch(keyword) {
-    this.setState({keyword: keyword});
-  }
-
   onSort(sort) {
     this.setState({
       sort: {
@@ -47,19 +41,9 @@ class App extends Component {
   }
 
   render() {
-    // var {
-      // keyword,
-      // sort
-    // } = this.state; // var tasks = this.state.tasks;
     var {isDisplayForm} = this.props;
 
 
-    //
-    // if (keyword) {
-    //     tasks = tasks.filter(task => {
-    //         return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
-    //     })
-    // }
     //
     // if (sort.by === 'name') {
     //     if (sort.value === 1) {
@@ -102,7 +86,7 @@ class App extends Component {
             </button>
           </div>
           {/* Search-Sort */}
-          <TaskControl onSearch={this.onSearch} onSort={this.onSort}/> {/* List */}
+          <TaskControl onSort={this.onSort}/> {/* List */}
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <TaskList/>
@@ -117,7 +101,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isDisplayForm: state.isDisplayForm,
-    taskEditing: state.taskEditing
+    taskEditing: state.taskEditing,
   };
 }
 

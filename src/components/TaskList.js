@@ -28,34 +28,26 @@ class TaskList extends Component {
     }
 
     render() {
-        // var {tasks, filterTable} = this.props;
+        var {tasks, filterTable, keyword} = this.props;
         var {filterName, filterStatus} = this.state;
-        // if (filterTable.name) {
-        //     tasks = tasks.filter(task => {
-        //         return task.name.toLowerCase().indexOf(filterTable.name.toLowerCase()) !== -1;
-        //     });
-        // }
-        //
-        // tasks = tasks.filter(task => {
-        //     if (filterTable.status === -1) {
-        //         return task;
-        //     }
-        //     return task.status === (filterTable.status === 1 ? true : false) ;
-        // })
-        ///////////////////////////////////
-        var {tasks} = this.props;
-        if (filterName) {
+        if (filterTable.name) {
             tasks = tasks.filter(task => {
-                return task.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1;
+                return task.name.toLowerCase().indexOf(filterTable.name.toLowerCase()) !== -1;
             });
         }
 
         tasks = tasks.filter(task => {
-            if (filterStatus === -1) {
+            if (filterTable.status === -1) {
                 return task;
             }
-            return task.status === (filterStatus === 1 ? true : false) ;
+            return task.status === (filterTable.status === 1 ? true : false) ;
         })
+
+        if (keyword) {
+          tasks = tasks.filter(task => {
+              return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+          });
+        }
 
         var elementTasks = tasks.map((element, index) => {
             return <TaskItem
@@ -111,7 +103,8 @@ class TaskList extends Component {
 const mapStateToProps = state => {
   return {
     tasks: state.tasks,
-    filterTable: state.filterTable
+    filterTable: state.filterTable,
+    keyword: state.keyword
   };
 }
 
