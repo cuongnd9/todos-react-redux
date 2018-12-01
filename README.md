@@ -1,4 +1,4 @@
-# To Do List 2
+# To Do List Plus
 
 Continuing with [To Do List](https://github.com/ndc07/to-do-list) using React, I upgrade it with Redux.
 
