@@ -1,29 +1,21 @@
-# Todo App
+# todos-react-redux
 
-📝 To Do App using React.
+> 📝 Todos App using React and Redux.
 
-![fireshot capture 1 - to do list - http___localhost_3000_](https://user-images.githubusercontent.com/34389409/45586611-591f8800-b924-11e8-9355-42f977b12e6d.png)
+## Install
 
-## Installation
-
+Install dependencies.
 ```
-npm install
+$ npm i
 ```
 
-## Demo
+## Usage
 
-You can see demo [here.](https://todolist-ndc07.firebaseapp.com/)
-
-## Built With
-
-* [Reactjs](https://reactjs.org/docs/getting-started.html)
-* [Redux](https://redux.js.org/)
-* [Bootstrap](http://getbootstrap.com/docs/4.1/getting-started/introduction/)
-
-## Author
-
-[ndc07](https://github.com/ndc07) 💎
+One line to run.
+```
+$ npm start
+```
 
 ## License
 
-[MIT](https://github.com/ndc07/to-do-list/blob/master/LICENSE)
+![](https://img.shields.io/github/license/cuongw/todos-react-redux.svg?style=flat-square)
