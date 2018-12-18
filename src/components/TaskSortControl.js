@@ -21,6 +21,7 @@ class TaskSortControl extends Component {
                 value: sortValue
             }
         });
+
         this.props.onSort({by: sortName, name: sortValue});
     }
 

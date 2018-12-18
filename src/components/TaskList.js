@@ -17,6 +17,7 @@ class TaskList extends Component {
         var target = event.target;
         var value = target.value;
         var name = target.name;
+
         this.props.onFilter({
           name: name === 'filterName' ? value : this.state.filterName,
           status: name === 'filterStatus' ? value : this.state.filterStatus

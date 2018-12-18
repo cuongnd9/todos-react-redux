@@ -1,16 +1,18 @@
-# To Do List Plus
+# Todo App
 
-Continuing with [To Do List](https://github.com/ndc07/to-do-list) using React, I upgrade it with Redux.
+📝 To Do App using React.
 
 ![fireshot capture 1 - to do list - http___localhost_3000_](https://user-images.githubusercontent.com/34389409/45586611-591f8800-b924-11e8-9355-42f977b12e6d.png)
 
-## Getting Started
+## Installation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+```
+npm install
+```
 
 ## Demo
 
-You can see demo [here.](https://to-do-list-2-65557.firebaseapp.com/)
+You can see demo [here.](https://todolist-ndc07.firebaseapp.com/)
 
 ## Built With
 
@@ -18,12 +20,10 @@ You can see demo [here.](https://to-do-list-2-65557.firebaseapp.com/)
 * [Redux](https://redux.js.org/)
 * [Bootstrap](http://getbootstrap.com/docs/4.1/getting-started/introduction/)
 
-## Authors
+## Author
 
-* **Nguyen Duy Cuong** - *Initial work* - [ndc07](https://github.com/ndc07)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+[ndc07](https://github.com/ndc07) 💎
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+[MIT](https://github.com/ndc07/to-do-list/blob/master/LICENSE)

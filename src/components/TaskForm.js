@@ -18,23 +18,27 @@ class TaskForm extends Component {
 
     componentWillMount() {
         var task = this.props.taskEditing;
+
         if (task) {
             this.setState({
                 id: task.id,
                 name: task.name,
                 status: task.status
             });
+
         } else {
             this.setState({
                 id: '',
                 name: '',
                 status: false
             });
+
         }
     }
 
     componentWillReceiveProps(nextProps) {
         var task = nextProps.taskEditing;
+
         if (task) {
             this.setState({
                 id: task.id,
@@ -73,6 +77,7 @@ class TaskForm extends Component {
         } else {
           this.props.onAddTask(this.state);
         }
+
         this.onCancel();
         this.onCloseForm();
     }
@@ -96,11 +101,14 @@ class TaskForm extends Component {
     render() {
         var {id} = this.state;
         if (!this.props.isDisplayForm) return '';
+
         return (
             <div className="panel panel-success">
                 <div className="panel-heading">
                     <h3 className="panel-title">
+
                         {id ? 'Edit To Do' : 'Add To Do'}
+
                         <p className="text-right" style={{float:'right'}}>
                             <i className="fa fa-times-circle" onClick={this.onCloseForm}></i>
                         </p>
